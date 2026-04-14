@@ -1,0 +1,204 @@
+/* --------------------------------- */
+/* COLOR VARIABLES */
+/* --------------------------------- */
+:root {
+  --white: #ffffff;           /* page background and hover text */
+  --light-blue: #206779;      /* accent for highlights */
+  --darker-blue: #0e4f61;     /* secondary headings */
+  --dark-contrast: #14374b;   /* default dark text */
+  --darkest: #080e50;         /* header/footer background */
+}
+
+/* --------------------------------- */
+/* UNIVERSAL BOX SIZING */
+/* --------------------------------- */
+* {
+  box-sizing: border-box;     /* ensures padding/border don't increase element size */
+}
+
+/* --------------------------------- */
+/* BODY STYLING */
+/* --------------------------------- */
+body {
+  margin: 0;
+  font-family: 'Aktiv Grotesk', Arial, Helvetica, sans-serif; /* main font */
+  background-color: var(--white);
+  color: var(--dark-contrast);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;          /* fills viewport height */
+}
+
+/* --------------------------------- */
+/* HEADER STYLING */
+/* --------------------------------- */
+header {
+  background-color: var(--darkest);
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* HEADER CONTENT */
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-content h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* LANGUAGE TOGGLE */
+.language-toggle {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--light-blue);
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.language-toggle span {
+  transition: color 0.3s ease;
+}
+
+.language-toggle span.active {
+  color: var(--white);
+  cursor: default;
+  pointer-events: none;
+}
+
+.language-toggle span:not(.active):hover {
+  color: var(--darker-blue);
+  text-decoration: underline;
+}
+
+/* --------------------------------- */
+/* NAVIGATION STYLING */
+/* --------------------------------- */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;       /* center menu */
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  width: 100%;
+}
+
+nav li {
+  flex: 1;                        /* equal width per item */
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  height: 50px;                   /* thinner header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;               /* nudge text downward */
+  transition: color 0.3s ease;
+}
+
+/* Gradient hover shadow */
+nav li::after {
+  content: '';
+  position: absolute;
+  top: 5px;                       /* inner padding for shadow */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 10px);      /* inner vertical padding */
+  opacity: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.05));
+  z-index: -1;                     /* behind text */
+  transition: opacity 0.3s ease;
+}
+
+nav li:hover::after {
+  opacity: 1;                      /* show gradient shadow */
+}
+
+nav li:hover {
+  color: var(--white);             /* brighten text on hover */
+}
+
+/* --------------------------------- */
+/* MAIN CONTENT STYLING */
+main {
+  flex: 1;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 1rem 6rem 1rem;    /* extra bottom to avoid footer overlap */
+}
+
+h2 {
+  color: var(--darker-blue);
+  margin-top: 2rem;
+}
+
+/* Scrollable sections */
+.scrollable {
+  max-height: 250px;
+  overflow-y: auto;                /* scroll only if needed */
+  padding-right: 0.5rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* --------------------------------- */
+/* FOOTER STYLING */
+footer {
+  background-color: var(--darkest);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+/* --------------------------------- */
+/* RESPONSIVE STYLING */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  .language-toggle {
+    margin-top: 0.5rem;
+  }
+
+  .scrollable {
+    max-height: 180px;
+  }
+
+  nav li {
+    height: 45px;                  /* slightly smaller on mobile */
+    padding-top: 3px;
+  }
+
+  nav li::after {
+    top: 3px;
+    height: calc(100% - 6px);
+  }
+}
