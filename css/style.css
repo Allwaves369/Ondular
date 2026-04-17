@@ -6,7 +6,7 @@
   --light-blue: #206779;      /* accent for highlights */
   --darker-blue: #0e4f61;     /* secondary headings */
   --dark-contrast: #14374b;   /* default dark text */
-  --darkest: #080e50;         /* header/footer background */
+  --darkest: #03064b;         /* header/footer background */
 }
 
 /* --------------------------------- */
@@ -17,18 +17,35 @@
 }
 
 /* --------------------------------- */
-/* BODY STYLING */
+/* BODY RESET */
 /* --------------------------------- */
 body {
   margin: 0;
-  font-family: 'Aktiv Grotesk', Arial, Helvetica, sans-serif; /* main font */
-  background-color: var(--white);
+  font-family: 'Aktiv Grotesk', Arial, Helvetica, sans-serif;
   color: var(--dark-contrast);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;          /* fills viewport height */
+  min-height: 100vh;
+
+  /* ❌ REMOVE background from body */
+  background: none;
 }
 
+/* --------------------------------- */
+/* FIXED BACKGROUND LAYER */
+/* --------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0; /* shorthand for top, right, bottom, left = 0 */
+
+  background-image: url("../assets/background-water2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: -1; /* stays behind everything */
+}
 /* --------------------------------- */
 /* HEADER STYLING */
 /* --------------------------------- */
@@ -56,35 +73,8 @@ header {
 }
 
 .header-content h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin: 0;
-}
-
-/* LANGUAGE TOGGLE */
-.language-toggle {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: var(--light-blue);
-  user-select: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.language-toggle span {
-  transition: color 0.3s ease;
-}
-
-.language-toggle span.active {
-  color: var(--white);
-  cursor: default;
-  pointer-events: none;
-}
-
-.language-toggle span:not(.active):hover {
-  color: var(--darker-blue);
-  text-decoration: underline;
 }
 
 /* --------------------------------- */
@@ -99,41 +89,6 @@ nav ul {
   width: 100%;
 }
 
-nav li {
-  flex: 1;                        /* equal width per item */
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  height: 50px;                   /* thinner header */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 5px;               /* nudge text downward */
-  transition: color 0.3s ease;
-}
-
-/* Gradient hover shadow */
-nav li::after {
-  content: '';
-  position: absolute;
-  top: 5px;                       /* inner padding for shadow */
-  left: 0;
-  width: 100%;
-  height: calc(100% - 10px);      /* inner vertical padding */
-  opacity: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.05));
-  z-index: -1;                     /* behind text */
-  transition: opacity 0.3s ease;
-}
-
-nav li:hover::after {
-  opacity: 1;                      /* show gradient shadow */
-}
-
-nav li:hover {
-  color: var(--white);             /* brighten text on hover */
-}
 
 /* --------------------------------- */
 /* MAIN CONTENT STYLING */
@@ -147,58 +102,4 @@ main {
 h2 {
   color: var(--darker-blue);
   margin-top: 2rem;
-}
-
-/* Scrollable sections */
-.scrollable {
-  max-height: 250px;
-  overflow-y: auto;                /* scroll only if needed */
-  padding-right: 0.5rem;
-  line-height: 1.6;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-/* --------------------------------- */
-/* FOOTER STYLING */
-footer {
-  background-color: var(--darkest);
-  color: var(--white);
-  text-align: center;
-  padding: 1rem;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-}
-
-/* --------------------------------- */
-/* RESPONSIVE STYLING */
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .logo {
-    height: 70px;
-  }
-
-  .language-toggle {
-    margin-top: 0.5rem;
-  }
-
-  .scrollable {
-    max-height: 180px;
-  }
-
-  nav li {
-    height: 45px;                  /* slightly smaller on mobile */
-    padding-top: 3px;
-  }
-
-  nav li::after {
-    top: 3px;
-    height: calc(100% - 6px);
-  }
 }
